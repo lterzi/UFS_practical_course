@@ -7,6 +7,7 @@ Analysis of **Meteosat Third Generation (MTG) Flexible Combined Imager (FCI)** d
 | File | Purpose |
 |------|---------|
 | `investigate_fci.ipynb` | Main analysis notebook |
+| `download_fci.sh` | Downloads FDHSI data from the EUMETSAT Data Store for a given date |
 | `plots/` | Output figures and CSV time series |
 
 ## Data
@@ -18,6 +19,15 @@ The notebook expects FCI Level-1C **FDHSI** (Full Disk High Spectral resolution 
 ```
 
 Each full-disk scan consists of ~40 body files (`CHK-BODY`) covering horizontal strips south-to-north, plus one trail file (`CHK-TRAIL`) that contains only metadata. The notebook ignores trail files automatically.
+
+To download data for a specific date, run:
+
+```bash
+bash download_fci.sh 20260805   # YYYYMMDD
+bash download_fci.sh            # defaults to today (UTC)
+```
+
+The script fetches EUMETSAT collection `EO:EUM:DAT:0662` (FDHSI, all 16 channels). It requires the `eumdac` CLI tool to be installed and configured with valid EUMETSAT API credentials.
 
 ## Setting up the Python environment
 
