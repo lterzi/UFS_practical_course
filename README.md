@@ -62,12 +62,4 @@ All standard-library modules used (`re`, `glob`, `gc`, `collections`, `pathlib`,
 
 4. **Zugspitze zoom** — side-by-side vis_06 / ir_105 map zoomed to the Alps, saved to `plots/fci_vis06_ir105_zugspitze_zoom.png`.
 
-5. **Exercises** — guided tasks on cloud top temperature, cloud fraction, and cloud top height estimation.
-
-
-## Notes
-
-- The **FDHSI** product (collection `0662`) contains all 16 channels at 1 km (VIS/NIR) and 2 km (IR/WV) resolution. The older **HRFI** product (collection `0665`) contains only 4 channels (vis_06, nir_22, ir_38, ir_105) and is not suitable for the all-channels overview.
-- Satpy's `group_files` is not used for scan grouping because its time-based clustering breaks when consecutive scans are back-to-back. Files are instead grouped by the scan number `SSSS` embedded in the filename.
-- Dask is forced to synchronous mode (`scheduler='synchronous'`) to prevent HDF5 file-locking crashes when multiple threads try to read the same file.
-- The time series loop explicitly deletes each `Scene` object and calls `gc.collect()` after every scan to prevent memory accumulation from crashing the kernel.
+5. **Exercises** — estimate cloud top temperature, cloud fraction, and cloud top height
