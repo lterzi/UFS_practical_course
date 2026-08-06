@@ -72,5 +72,5 @@ All standard-library modules used (`re`, `glob`, `gc`, `collections`, `pathlib`,
 
 4. **Zugspitze zoom** — side-by-side vis_06 / ir_105 map zoomed to the Alps, saved to `plots/fci_vis06_ir105_zugspitze_zoom.png`.
 
-5. **Exercises** — guided tasks on cloud top temperature, cloud fraction, and cloud top height estimation.
+5. **Exercises** — determine cloud top temperature, cloud fraction, and cloud top height estimation.
 
