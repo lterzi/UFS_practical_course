@@ -26,7 +26,7 @@ Create a virtual environment and install the required packages:
 ```bash
 python3 -m venv MTG_env
 source MTG_env/bin/activate
-pip install satpy cartopy pyproj dask numpy matplotlib pandas
+pip install satpy cartopy pyproj dask numpy matplotlib pandas netcdf4
 ```
 
 To make the environment available as a kernel in Jupyter:
