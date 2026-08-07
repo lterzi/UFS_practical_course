@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import xarray as xr
 
 DATA_DIR = "/scratch/l/L.Terzi/CAMS/"
-OUT_DIR = "/project/meteo/work/L.Terzi/ufs_praktikum/CAMS/plots"
+OUT_DIR = "/project/meteo/work/L.Terzi/ufs_praktikum/MTG-0degrees-FCI-Level1c/plots"
 
 VARIABLE = "aod550"
 CBAR_LABEL = "Total Aerosol Optical Depth at 550 nm"
