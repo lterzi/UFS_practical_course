@@ -19,8 +19,12 @@ OUT_DIR = "plots"
 VARIABLE = "aod550"
 CBAR_LABEL = "Total Aerosol Optical Depth at 550 nm"
 
-# bbox approximated from the Windy.com AOD screenshot
-NORTH, SOUTH, WEST, EAST = 75.0, 10.0, -90.0, 65.0
+# Default bbox — override with --north/--south/--west/--east
+# North America + Europe (default):  N=75  S=10  W=-170  E=65
+# Europe + North Africa (original):  N=75  S=10  W=-90   E=65
+# North America only:                N=75  S=10  W=-170  E=-50
+# Central Europe:                    N=72  S=35  W=-15   E=35
+NORTH, SOUTH, WEST, EAST = 75.0, 10.0, -170.0, 65.0
 
 
 def normalize_date(date: str) -> str:
@@ -29,7 +33,7 @@ def normalize_date(date: str) -> str:
     return datetime.datetime.strptime(date, fmt).strftime("%Y%m%d")
 
 
-def plot_day(data_file: str) -> None:
+def plot_day(data_file: str, north: float, south: float, west: float, east: float) -> None:
     os.makedirs(OUT_DIR, exist_ok=True)
 
     ds = xr.open_dataset(data_file)
@@ -40,7 +44,7 @@ def plot_day(data_file: str) -> None:
 
     # longitude comes in 0..360, convert to -180..180 and sort so the bbox slice works
     ds = ds.assign_coords(longitude=(((ds.longitude + 180) % 360) - 180)).sortby("longitude")
-    ds = ds.sel(longitude=slice(WEST, EAST), latitude=slice(NORTH, SOUTH))
+    ds = ds.sel(longitude=slice(west, east), latitude=slice(north, south))
 
     da = ds[VARIABLE]
 
@@ -98,7 +102,11 @@ def plot_day(data_file: str) -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", default=None, help="YYYYMMDD or YYYY-MM-DD, defaults to today (UTC)")
+    parser.add_argument("--north", type=float, default=NORTH)
+    parser.add_argument("--south", type=float, default=SOUTH)
+    parser.add_argument("--west",  type=float, default=WEST)
+    parser.add_argument("--east",  type=float, default=EAST)
     args = parser.parse_args()
 
     date = normalize_date(args.date) if args.date else datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d")
-    plot_day(os.path.join(DATA_DIR, f"{date}_aod550.nc"))
+    plot_day(os.path.join(DATA_DIR, f"{date}_aod550.nc"), args.north, args.south, args.west, args.east)
