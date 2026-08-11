@@ -56,7 +56,7 @@ def plot_day(data_file: str, north: float, south: float, west: float, east: floa
     map_aspect = (lat_max - lat_min) / (lon_max - lon_min)
     extra_height = 1.8  # room for title and colorbar
 
-    vmin, vmax = float(da.min()), float(da.max())
+    vmin, vmax = 0.0, 2.0
 
     # after squeezing size-1 dims, exactly one time-like dim should remain
     # (forecast_period for a multi-leadtime file, forecast_reference_time
