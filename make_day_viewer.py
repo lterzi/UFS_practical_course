@@ -18,7 +18,7 @@ import os
 
 from PIL import Image
 
-PLOTS_DIR = "/project/meteo/work/L.Terzi/ufs_praktikum/CAMS/plots"
+PLOTS_DIR = "plots"
 FRAME_WIDTH = 700
 JPEG_QUALITY = 80
 
